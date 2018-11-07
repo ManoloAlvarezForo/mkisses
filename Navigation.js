@@ -4,12 +4,11 @@ import {
 } from 'react-navigation';
 
 import AuthLoadingScreen from './src/components/Authentication/AuthLoadingScreen/AuthLoadingScreen';
-import LoginScreen from './src/components/Authentication/Login/Login';
 import HomeScreen from './src/components/Home/Home';
-import SignInScreen from './src/components/Authentication/SignIn/SignIn';
+import AuthenticationSelect from './src/components/Authentication/AuthenticationSelect/AuthenticationSelect';
 
 const AppStack = createStackNavigator({ Home: HomeScreen });
-const AuthStack = createStackNavigator({ Login: LoginScreen, SignIn: SignInScreen});
+const AuthStack = createStackNavigator({ AuthSelect: AuthenticationSelect});
 
 export default createSwitchNavigator(
   {
