@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, Icon } from 'native-base';
 import { LOGIN_MUTATION } from '../AuthenticationQueries';
-import { _saveToken } from '../../../../util';
+import { saveToken } from '../../../../util';
 import { graphql } from 'react-apollo';
 import { ScrollView, StyleSheet, Text, View, Image, StatusBar } from 'react-native';
 
@@ -44,47 +44,55 @@ class Login extends React.Component {
                     <View style={{ flex: 1, height: 300, alignItems: 'center', alignContent: 'center', justifyContent: 'center' }} >
                         <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
                             <Image style={{ width: 150, height: 150 }} source={require('../../../images/logo.png')} />
-                            <Text style={{ fontSize: 65, color: '#ED4C5C', fontFamily: 'VINCHAND' }}>Kisses</Text>
+                            <Text style={{ fontSize: 65, color: '#FF006E', fontFamily: 'VINCHAND' }}>Kisses</Text>
                         </View>
                     </View>
-                    <Form style={{ paddingLeft: 15, paddingRight: 15 }}>
+                    <Form style={{ paddingLeft: 15, paddingRight: 5 }}>
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
-                                <Icon active name='mail' type="Feather" />
+                                <Icon active style={{color: '#7d7d7d'}} name='mail' type="Feather" />
                             </View>
-                            <ModernInput style={{ flex: 9 }}
+                            <ModernInput 
+                                style={{ flex: 9 }}
+                                dark
                                 label={'Email'}
-                                customBorderColor={'#ED4C5C'}
-                                labelStyle={{ color: '#ED4C5C' }}
+                                customBorderColor={'#FF006E'}
+                                labelStyle={{ color: '#FF006E' }}
                                 onChangeText={value => this._handleInputChange('email', value)}
                             />
                         </View>
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
-                                <Icon active name='lock' type="Feather" />
+                                <Icon active style={{color: '#7d7d7d'}} name='lock' type="Feather" />
                             </View>
                             <ModernInput
                                 style={{ flex: 9 }}
+                                dark
                                 label={'Password'}
-                                customBorderColor={'#ED4C5C'}
-                                labelStyle={{ color: '#ED4C5C' }}
+                                customBorderColor={'#FF006E'}
+                                labelStyle={{ color: '#FF006E' }}
                                 isPassword={true}
                                 onChangeText={value => this._handleInputChange('password', value)}
                             />
                         </View>
                     </Form>
                     <View style={{ marginTop: 30, paddingLeft: 15, paddingRight: 15 }}>
-                        <Button style={{ borderRadius: 5, backgroundColor: '#292C2F' }} block onPress={this._handleSubmit}><Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>LOGIN</Text></Button>
+                        <Button large style={{ borderRadius: 50, backgroundColor: 'transparent', borderWidth: 2, borderColor: 'white'}} block onPress={this._tempLoginAccept}><Text style={{ fontSize: 18, color: 'white', fontWeight: 'bold' }}>LOGIN</Text></Button>
                     </View>
                     <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', flexDirection: 'row', marginTop: 30 }}>
                         <Button transparent dark onPress={this._handleOnPressRegister}>
-                            <Text>DON’T HAVE AN ACCOUNT YET?  SIGN UP</Text>
+                            <Text style={{color: 'white'}}>DON’T HAVE AN ACCOUNT YET?  <Text style={{fontWeight: 'bold', color: 'white'}}>SIGN UP</Text></Text>
                         </Button>
                     </View>
                 </View>
 
             </ScrollView>
         );
+    }
+
+    //TODO: This method is only used to test the access after the login to the home screen will be DELETED.
+    _tempLoginAccept = () => {
+        this.props.navigation.navigate('App');
     }
 
     _handleOnPressRegister = () => {
@@ -111,7 +119,7 @@ class Login extends React.Component {
     }
 
     _saveUserData = token => {
-        _saveToken(token)
+        saveToken(token)
     }
 }
 
@@ -119,9 +127,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 24,
-        paddingLeft: 10,
-        paddingRight: 10,
-        backgroundColor: 'white',
+        paddingLeft: 5,
+        paddingRight: 5,
+        backgroundColor: '#292C2F',
+        height: 100
     },
     content: {
     }

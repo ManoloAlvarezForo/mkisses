@@ -13,13 +13,17 @@ import BaseInput from '../BaseInput';
 const FOCUS_BORDER_WIDTH = 2;
 const NO_FOCUS_BORDER_WIDTH = 1;
 const INACTIVE_COLOR = '#7d7d7d';
-const DEFAULT_TEXT_COLOR = '#1d2129';
+const DEFAULT_TEXT_COLOR = '#292C2F';
+const DARK = '#292C2F';
+const LIGHT = 'white';
 
 export default class ModernInput extends BaseInput {
     componentDidMount() {
         this.setState({
             changeColor: INACTIVE_COLOR,
-            inputBorderWidth: NO_FOCUS_BORDER_WIDTH
+            inputBorderWidth: NO_FOCUS_BORDER_WIDTH,
+            textColor: this.props.dark ? LIGHT : DARK,
+            typeColor: this.props.dark ? DARK : LIGHT
         })
     }
     static propTypes = {
@@ -27,12 +31,14 @@ export default class ModernInput extends BaseInput {
          * this is applied as active border and label color
          */
         height: PropTypes.number,
+        dark: PropTypes.bool
     };
 
     static defaultProps = {
         // borderColor: '#7A7593',
         animationDuration: 200,
         height: 48,
+        dark: false,
     };
 
     render() {
@@ -43,7 +49,7 @@ export default class ModernInput extends BaseInput {
             inputStyle,
             labelStyle,
             isPassword,
-            onChangeText
+            onChangeText,
         } = this.props;
         const {
             width,
@@ -78,6 +84,7 @@ export default class ModernInput extends BaseInput {
                                 styles.label,
                                 labelStyle,
                                 {
+                                    backgroundColor: this.state.typeColor,
                                     color: this.state.changeColor,
                                     marginLeft: focusedAnim.interpolate({
                                         inputRange: [0, 1],
@@ -142,8 +149,29 @@ export default class ModernInput extends BaseInput {
         this.setState({
             changeColor: this.props.customBorderColor,
             inputBorderWidth: FOCUS_BORDER_WIDTH,
-            textColor: DEFAULT_TEXT_COLOR
+            textColor: this.props.light ? DARK : LIGHT,
         })
+    }
+
+    _setColorType = () => {
+        let response = ''
+        
+        if (!this.props.dark) {
+            response = DEFAULT_TEXT_COLOR
+            console.log('none');
+        }
+
+        if (this.props.dark) {
+            response = DARK;
+            console.log('DARK');
+        }
+
+        if (!this.props.dark) {
+            response = LIGHT
+            console.log('LIGHT');
+        }
+
+        return response;
     }
    
     _firstOnBlur = () => {
@@ -175,13 +203,13 @@ const styles = StyleSheet.create({
     },
     label: {
         flexDirection: 'row',
-        backgroundColor: '#ffffff',
+        // backgroundColor: '#37393B',
         alignSelf: 'flex-start'
     },
     textInput: {
-        borderRadius: 5,
+        borderRadius: 50,
         // borderWidth: 1,
-        color: 'black',
+        color: 'white',
         fontSize: 16,
         paddingLeft: 14,
         paddingRight: 14

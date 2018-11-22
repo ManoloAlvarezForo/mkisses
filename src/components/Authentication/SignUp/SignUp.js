@@ -1,26 +1,13 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, StyleSheet, StatusBar } from 'react-native'
-import { Button, Form, Icon } from 'native-base';
+import { Button, Form, Icon, Left, Header, Body, Title } from 'native-base';
 import { graphql } from 'react-apollo';
 import { SIGNUP_MUTATION } from '../AuthenticationQueries';
-import { _saveToken } from '../../../../util';
+import { saveToken } from '../../../../util';
 
 import ModernInput from '../../Input/ModernInput/ModernInput'
 
 class SignUp extends Component {
-  static navigationOptions = {
-    title: 'Sign Up',
-    headerStyle: {
-      backgroundColor: "#292C2F"
-    },
-    headerTitleStyle: {
-      fontWeight: "bold",
-      color: "#ffff",
-    },
-    headerTintColor: "#fff",
-    animationEnabled: true
-  }
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -51,72 +38,86 @@ class SignUp extends Component {
         style={styles.container}
         contentContainerStyle={styles.content}
       >
+        <Header androidStatusBarColor="#292C2F" style={{backgroundColor: '#292C2F'}}>
         <StatusBar backgroundColor='#292C2F' />
-        <View style={styles.content}>
-          <Form style={{ paddingLeft: 15, paddingRight: 10 }}>
+          <Left>
+            <Button transparent>
+              <Icon name='arrow-back' active/>
+            </Button>
+          </Left>
+          <Body>
+            <Title style={{fontWeight: 'bold'}}>Sign Up</Title>
+          </Body>
+        </Header>
+        
+        <View style={{paddingTop: 40}}>
+          <Form style={{ paddingLeft: 15, paddingRight: 5 }}>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
-                <Icon style={{color: '#292C2F'}} active name='user' type="Feather" />
+                <Icon active style={{color: '#7d7d7d'}} active name='user' type="Feather" />
               </View>
               <ModernInput style={{ flex: 9 }}
                 label={'Name'}
-                customBorderColor={'#ED4C5C'}
-                labelStyle={{ color: '#ED4C5C' }}
+                dark
+                customBorderColor={'#FF006E'}
+                labelStyle={{ color: '#FF006E' }}
                 onChangeText={value => this._handleInputChange('name', value)}
               />
             </View>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
-                <Icon style={{color: '#292C2F'}} active name='mail' type="Feather" />
+                <Icon active style={{color: '#7d7d7d'}} active name='mail' type="Feather" />
               </View>
               <ModernInput style={{ flex: 9 }}
                 label={'Email'}
-                customBorderColor={'#ED4C5C'}
-                labelStyle={{ color: '#ED4C5C' }}
+                dark
+                customBorderColor={'#FF006E'}
+                labelStyle={{ color: '#FF006E' }}
                 onChangeText={value => this._handleInputChange('email', value)}
               />
             </View>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
-                <Icon style={{color: '#292C2F'}} active name='lock' type="Feather" />
+                <Icon active style={{color: '#7d7d7d'}} active name='lock' type="Feather" />
               </View>
               <ModernInput
                 style={{ flex: 9 }}
+                dark
                 label={'Password'}
-                customBorderColor={'#ED4C5C'}
-                labelStyle={{ color: '#ED4C5C' }}
+                customBorderColor={'#FF006E'}
+                labelStyle={{ color: '#FF006E' }}
                 isPassword={true}
                 onChangeText={value => this._handleInputChange('password', value)}
               />
             </View>
             <View style={{ flexDirection: 'row' }}>
               <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
-                <Icon style={{color: '#292C2F'}} active name='lock' type="Feather" />
+                <Icon active style={{color: '#7d7d7d'}} active name='lock' type="Feather" />
               </View>
               <ModernInput
                 style={{ flex: 9 }}
+                dark
                 label={'Repeat Password'}
-                customBorderColor={'#ED4C5C'}
-                labelStyle={{ color: '#ED4C5C' }}
+                customBorderColor={'#FF006E'}
+                labelStyle={{ color: '#FF006E' }}
                 isPassword={true}
                 onChangeText={value => this._handleInputChange('repeatPassword', value)}
               />
             </View>
           </Form>
-          <View style={{ marginTop: 10, paddingLeft: 15, paddingRight: 15 }}>
+          <View style={{ marginTop: 25, paddingLeft: 15, paddingRight: 15 }}>
           <View style={{ marginTop: 20 }}>
-            <Button style={{ borderRadius: 5, backgroundColor: '#ED4C5C' }} block onPress={this._handleSubmit}>
+            <Button large style={{ borderRadius: 50, backgroundColor: 'transparent', borderColor: '#FF006E', borderWidth: 2 }} block onPress={this._handleSubmit}>
               <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>CREATE ACCOUNT</Text>
             </Button>
           </View>
           <View style={{marginTop: 40, flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
             <Button transparent dark onPress={this._handleOnPressLogin}>
-              <Text>ALREADY HAVE AN ACCOUNT?  LOG IN</Text>
+              <Text style={{color: 'white'}}>ALREADY HAVE AN ACCOUNT?   <Text style={{fontWeight: 'bold'}}>LOG IN</Text></Text>
             </Button>
           </View>
           </View>
         </View>
-
       </ScrollView>
     )
   }
@@ -133,7 +134,7 @@ class SignUp extends Component {
   }
 
   _saveUserData = token => {
-    _saveToken(token)
+    saveToken(token)
   }
 
   _handleOnPressLogin = () => {
@@ -151,14 +152,13 @@ class SignUp extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 24,
-    paddingLeft: 10,
-    paddingRight: 10,
-    backgroundColor: 'white',
+    // flex: 1,
+    // paddingTop: 30,
+    // paddingLeft: 5,
+    backgroundColor: '#292C2F',
   },
   content: {
-    paddingTop: 10
+    // paddingTop: 10
   }
 });
 

@@ -35,7 +35,8 @@ export default class BaseInput extends Component {
       focusedAnim: new Animated.Value(value ? 1 : 0),
       changeColor: '#7d7d7d',
       inputBorderWidth: 0,
-      textColor: '#000000'
+      textColor: '#000000',
+      typeColor: '#ffff'
     };
   }
 
