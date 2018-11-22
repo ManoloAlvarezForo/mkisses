@@ -12,19 +12,19 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 import { ApolloProvider } from 'react-apollo'
 import { setContext } from 'apollo-link-context';
-import {_getToken} from './util';
+import { getToken } from './util';
 import Navigation from './Navigation';
 
 const httpLink = new HttpLink({ uri: 'http://192.168.88.170:4000/graphql' });
 // Uncomment avobe code to localhost connection.
 // const httpLink = new HttpLink({ uri: 'http://localhost:4000/graphql' });
 const authLink = setContext(async (req, { headers }) => {
-  const token = await _getToken();
+  const token = await getToken();
   return {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : "",
-  }
+    }
   };
 });
 
@@ -34,15 +34,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-type Props = {};
 
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
         <Navigation />
       </ApolloProvider>
-
     );
   }
 }
