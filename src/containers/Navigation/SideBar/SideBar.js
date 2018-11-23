@@ -4,7 +4,7 @@ import { DrawerItems } from "react-navigation";
 
 const CustomDrawerContentComponent = (props) => (
   <SafeAreaView style={{backgroundColor: '#292C2F',flex: 10 }}>
-    <View style={{ height: 100, backgroundColor: '#292C2F', justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ height: 180, backgroundColor: '#292C2F', justifyContent: 'center', alignItems: 'center' }}>
     <Text style={{ fontSize: 65, color: '#FF006E', fontFamily: 'VINCHAND' }}>Kisses</Text>
     </View>
     <ScrollView style={{backgroundColor: '#292C2F'}}>
