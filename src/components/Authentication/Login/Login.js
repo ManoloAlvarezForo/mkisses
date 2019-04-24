@@ -80,7 +80,7 @@ class Login extends React.Component {
                         <Button large style={{ borderRadius: 50, backgroundColor: 'transparent', borderWidth: 2, borderColor: 'white'}} block onPress={this._tempLoginAccept}><Text style={{ fontSize: 18, color: 'white', fontWeight: 'bold' }}>LOGIN</Text></Button>
                     </View>
                     <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', flexDirection: 'row', marginTop: 30 }}>
-                        <Button transparent dark onPress={this._handleOnPressRegister}>
+                        <Button transparent dark onPress={this._handleSubmit}>
                             <Text style={{color: 'white'}}>DON’T HAVE AN ACCOUNT YET?  <Text style={{fontWeight: 'bold', color: 'white'}}>SIGN UP</Text></Text>
                         </Button>
                     </View>
