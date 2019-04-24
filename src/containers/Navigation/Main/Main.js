@@ -1,5 +1,5 @@
 import HomeScreen from '../../../components/Home/Home';
-import ProfileScreen from '../../../components/Profile';
+import ProductListScreen from '../../../components/Product/ProductList';
 
 import SideBar from '../SideBar/SideBar';
 import { createDrawerNavigator } from "react-navigation";
@@ -9,8 +9,10 @@ const {width} = Dimensions.get('window');
 
 const MainScreenRouter = createDrawerNavigator(
   {
-    Home: { screen: HomeScreen },
-    Profile: { screen: ProfileScreen}
+    Home: { screen: HomeScreen},
+    Products: { screen: ProductListScreen, navigationOptions: ({ navigation }) => ({
+      title: 'Product\'s Shop'
+    })}
   },
   {
     initialRouteName: 'Home',
@@ -19,18 +21,15 @@ const MainScreenRouter = createDrawerNavigator(
     drawerOpenRoute: 'DrawerOpen',
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
-    drawerWidth: width,
+    drawerWidth: width - 50,
     contentOptions: {
       activeBackgroundColor: '#FF006E',
       activeTintColor: 'white',
       inactiveTintColor: 'gray',
-      itemsContainerStyle: {
-        width: '100%',
-      },
       labelStyle: {
-        justifyContent: 'center',
         textAlign: 'center',
-        paddingLeft: (width / 2) - 50,
+        alignSelf: 'flex-start',
+        width: width - 90,
         fontSize: 20,
         fontWeight: '300'
       }
